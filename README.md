@@ -26,4 +26,11 @@ You can check out the [create-t3-app GitHub repository](https://github.com/t3-os
 ## How do I deploy this?
 
 Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
 # portfolio-builder
+
+<https://ui.shadcn.com/docs/components/comboboxs>
+
+```
+pnpm dlx shadcn-ui@latest add aspect-ratio button checkbox popover command dialog dropdown-menu form input label radio-group select separator switch tabs textarea toast tooltip
+```
