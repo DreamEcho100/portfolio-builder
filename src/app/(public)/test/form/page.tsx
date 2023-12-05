@@ -5,6 +5,7 @@ import { onFalsy } from "@de100/form-echo/helpers";
 import FormInput from "~/components/ui/@de100/input";
 import Form2 from "../form-2/page";
 import { z } from "zod";
+import Form from "~/components/ui/@de100/form";
 
 const formSchema = {
   username: z.string().min(2, {
@@ -27,11 +28,17 @@ export default function page() {
 
   return (
     <section className="flex flex-col gap-4">
-      <form>
+      <Form
+        store={formStore}
+        onSubmit={(params) => {
+          console.log("params.values", params.values);
+          console.log("params.validatedValues", params.validatedValues);
+        }}
+      >
         <FormInput store={formStore} name="username" />
         <FormInput store={formStore} name="counter" type="number" />
         <FormInput store={formStore} name="description" type="textarea" />
-      </form>
+      </Form>
 
       <Form2 />
     </section>

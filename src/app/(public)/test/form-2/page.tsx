@@ -40,7 +40,7 @@ export default function Form2() {
     console.log(values);
   }
 
-  if (typeof window !== "undefined") window.form = form;
+  if (typeof window !== "undefined") window.form2 = form;
 
   return (
     <Form {...form}>
