@@ -8,7 +8,7 @@ import {
 
 import { env } from "~/env";
 import { db } from "~/server/db";
-import { mysqlTable } from "~/server/db/utils";
+import { pgTable } from "~/server/db/utils";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -46,7 +46,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   },
-  adapter: DrizzleAdapter(db, mysqlTable),
+  adapter: DrizzleAdapter(db, pgTable),
   providers: [
     // DiscordProvider({
     //   clientId: env.DISCORD_CLIENT_ID,

@@ -31,7 +31,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
 
   return {
     db,
-    drizzleSchema: dbSchema,
+    dbSchema,
     session,
     ...opts,
   };

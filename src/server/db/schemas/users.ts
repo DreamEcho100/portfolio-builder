@@ -3,24 +3,37 @@ import {
   varchar,
   timestamp,
   text,
-  int,
+  integer,
   primaryKey,
   index,
-} from "drizzle-orm/mysql-core";
+} from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
-import { mysqlTable } from "../utils";
+import { pgTable } from "../utils";
 import { customPages } from "./custom-pages";
+import { createId } from "@paralleldrive/cuid2";
 
-export const users = mysqlTable("user", {
-  id: varchar("id", { length: 255 }).notNull().primaryKey(),
-  name: varchar("name", { length: 255 }),
-  email: varchar("email", { length: 255 }).notNull(),
-  emailVerified: timestamp("emailVerified", {
-    mode: "date",
-    fsp: 3,
-  }).default(sql`CURRENT_TIMESTAMP(3)`),
-  image: varchar("image", { length: 255 }),
-});
+export const users = pgTable(
+  "user",
+  {
+    id: varchar("id", { length: 255 })
+      .notNull()
+      .primaryKey()
+      .$default(createId),
+    name: varchar("name", { length: 255 }),
+    email: varchar("email", { length: 255 }).notNull(),
+    emailVerified: timestamp("emailVerified", {
+      mode: "date",
+      // fsp: 3,
+    }).default(sql`CURRENT_TIMESTAMP(3)`),
+    image: varchar("image", { length: 255 }),
+    createdAt: timestamp("created_at")
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+  },
+  (user) => ({
+    createdAtIndex: index("created_at_idx").on(user.createdAt),
+  }),
+);
 
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
@@ -28,10 +41,12 @@ export const usersRelations = relations(users, ({ many }) => ({
   customPages: many(customPages),
 }));
 
-export const accounts = mysqlTable(
+export const accounts = pgTable(
   "account",
   {
-    userId: varchar("userId", { length: 255 }).notNull(),
+    userId: varchar("userId", { length: 255 })
+      .notNull()
+      .references(() => users.id),
     type: varchar("type", { length: 255 })
       .$type<AdapterAccount["type"]>()
       .notNull(),
@@ -39,7 +54,7 @@ export const accounts = mysqlTable(
     providerAccountId: varchar("providerAccountId", { length: 255 }).notNull(),
     refresh_token: text("refresh_token"),
     access_token: text("access_token"),
-    expires_at: int("expires_at"),
+    expires_at: integer("expires_at"),
     token_type: varchar("token_type", { length: 255 }),
     scope: varchar("scope", { length: 255 }),
     id_token: text("id_token"),
@@ -55,13 +70,15 @@ export const accountsRelations = relations(accounts, ({ one }) => ({
   user: one(users, { fields: [accounts.userId], references: [users.id] }),
 }));
 
-export const sessions = mysqlTable(
+export const sessions = pgTable(
   "session",
   {
     sessionToken: varchar("sessionToken", { length: 255 })
       .notNull()
       .primaryKey(),
-    userId: varchar("userId", { length: 255 }).notNull(),
+    userId: varchar("userId", { length: 255 })
+      .notNull()
+      .references(() => users.id),
     expires: timestamp("expires", { mode: "date" }).notNull(),
   },
   (session) => ({
@@ -73,7 +90,7 @@ export const sessionsRelations = relations(sessions, ({ one }) => ({
   user: one(users, { fields: [sessions.userId], references: [users.id] }),
 }));
 
-export const verificationTokens = mysqlTable(
+export const verificationTokens = pgTable(
   "verificationToken",
   {
     identifier: varchar("identifier", { length: 255 }).notNull(),
