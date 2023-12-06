@@ -14,6 +14,7 @@ import { useStore } from "zustand";
 import Image from "next/image";
 import { api } from "~/trpc/react";
 import { getBaseUrl } from "~/libs/utils";
+import Link from "next/link";
 
 const types = ["BASIC", "MODERN"] as const;
 

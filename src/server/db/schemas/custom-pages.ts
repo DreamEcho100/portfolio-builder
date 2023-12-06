@@ -24,7 +24,7 @@ export const customPages = pgTable(
       .$default(createId),
     slug: varchar("slug", { length: 255 }).$default(createRandomSlug),
     // tesSlug: varchar("test_slug", { length: 255 }).$default(createRandomSlug),
-    fullName: varchar("full_name", { length: 255 }),
+    fullName: varchar("full_name", { length: 255 }).notNull(),
     bio: text("bio"),
     profileImageId: varchar("profile_image_id", { length: 255 }).references(
       () => images.id,

@@ -6,21 +6,13 @@ import type {
   SocialLink,
 } from "./_utils";
 import { Input } from "~/components/common/ui/input";
-import {
-  Select,
-  SelectGroup,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  SelectLabel,
-} from "~/components/common/ui/select";
 import Form from "~/components/common/@de100/form";
 import PhaseFormButtons from "./buttons";
 import { useStore } from "zustand";
 import { PlusIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { Button } from "~/components/common/ui/button";
 import { Label } from "~/components/common/ui/label";
+import SelectBase from "~/components/common/@de100/base/select";
 
 const types = ["LINKEDIN", "FACEBOOK", "WEBSITE"];
 
@@ -82,39 +74,39 @@ function SocialLinksManager(props: {
 
           <Label
             htmlFor={`${socialLink.id}-type`}
-            className="flex flex-col gap-1"
+            classVariants={{ layout: "col-container" }}
           >
             <strong className="font-semibold capitalize">type:</strong>{" "}
-            <Select
+            <SelectBase
               value={socialLink.type}
               onValueChange={(value) => {
                 updateSocialLink(socialLink.id, {
                   type: value as SocialLink["type"],
                 });
               }}
-            >
-              <SelectTrigger className="w-[180px]" id={`${socialLink.id}-type`}>
-                <SelectValue
-                  placeholder="Select a Type"
-                  className="capitalize"
-                />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Types</SelectLabel>
-                  {types.map((item) => (
-                    <SelectItem value={item} key={item} className="capitalize">
-                      {item.toLowerCase()}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+              trigger={{ className: "w-[180px]", id: `${socialLink.id}-type` }}
+              valueHolder={{
+                placeholder: "Select a Type",
+                className: "capitalize",
+              }}
+              options={[
+                {
+                  "data-type": "group",
+                  label: "Types",
+                  children: types.map((item) => ({
+                    value: item,
+                    key: item,
+                    className: "capitalize",
+                    children: item.toLowerCase(),
+                  })),
+                },
+              ]}
+            />
           </Label>
 
           <Label
             htmlFor={`${socialLink.id}-src`}
-            className="flex flex-col gap-1"
+            classVariants={{ layout: "col-container" }}
           >
             <strong className="font-semibold capitalize">url:</strong>{" "}
             <Input
@@ -127,7 +119,7 @@ function SocialLinksManager(props: {
           </Label>
           <Label
             htmlFor={`${socialLink.id}-title`}
-            className="flex flex-col gap-1"
+            classVariants={{ layout: "col-container" }}
           >
             <strong className="font-semibold capitalize">title:</strong>{" "}
             <Input

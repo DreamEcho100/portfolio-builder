@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 import type { BasicPhaseFormStoreApi, PhasesManagerStoreApi } from "./_utils";
-import FormInput from "~/components/common/@de100/input";
+import FormField from "~/components/common/@de100/form-field";
 import { useEdgeStore } from "~/libs/edgestore";
 import Form from "~/components/common/@de100/form";
 import PhaseFormButtons from "./buttons";
@@ -9,9 +9,11 @@ function ProfileImageField(props: { formStore: BasicPhaseFormStoreApi }) {
   const { edgestore } = useEdgeStore();
 
   return (
-    <FormInput
+    <FormField
       store={props.formStore}
       name="profileImage"
+      label="profile image"
+      labelStructure="wrapping"
       type="file"
       cb={async (type, payload) => {
         if (type === "FILE_BUFFER_CHANGE") {
@@ -52,9 +54,20 @@ export default function BasicPhaseForm(
         props.onSubmit();
       }}
     >
-      <FormInput store={props.basicPhaseFormStore} name="fullName" />
+      <FormField
+        store={props.basicPhaseFormStore}
+        name="fullName"
+        label="full name"
+        labelStructure="wrapping"
+      />
+      <FormField
+        store={props.basicPhaseFormStore}
+        name="bio"
+        type="textarea"
+        label="bio"
+        labelStructure="wrapping"
+      />
       <ProfileImageField formStore={props.basicPhaseFormStore} />
-      <FormInput store={props.basicPhaseFormStore} name="bio" type="textarea" />
 
       <PhaseFormButtons
         phasesManagerStore={props.phasesManagerStore}

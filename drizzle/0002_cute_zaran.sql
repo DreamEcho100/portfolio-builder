@@ -1,0 +1,1 @@
+ALTER TABLE "portfolio_builder_custom_page" ALTER COLUMN "full_name" SET NOT NULL;
