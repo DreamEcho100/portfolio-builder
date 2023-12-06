@@ -7,7 +7,7 @@ import { images, seo } from "./general";
 
 export const customPagesTemplateType = pgEnum("template_type", [
   "BASIC",
-  "STANDARD",
+  "MODERN",
 ]);
 export const socialLinksType = pgEnum("type", [
   "LINKEDIN",
@@ -53,8 +53,8 @@ export const socialLinks = pgTable(
   "social_link",
   {
     id: varchar("id", { length: 255 }).primaryKey().$default(createId),
-    name: varchar("name", { length: 255 }).notNull(),
-    src: varchar("src", { length: 255 }).notNull(),
+    title: varchar("title", { length: 255 }).notNull(),
+    url: varchar("url", { length: 255 }).notNull(),
     type: socialLinksType("type").default("WEBSITE"),
 
     customPageId: varchar("custom_page_id", { length: 255 })
@@ -67,7 +67,7 @@ export const socialLinks = pgTable(
   },
   (socialLink) => ({
     customPageIdIdx: index("custom_page_id_idx").on(socialLink.customPageId),
-    nameIndex: index("name_idx").on(socialLink.name),
+    titleIndex: index("title_idx").on(socialLink.title),
     createdAtIndex: index("created_at_idx").on(socialLink.createdAt),
     // userIdSlugUnq: unique("user_id_slug_unq").on(
     //   socialLinks.userId,

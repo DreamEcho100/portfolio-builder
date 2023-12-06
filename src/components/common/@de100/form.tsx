@@ -17,13 +17,15 @@ export default function Form<FieldsValues, ValidationsHandlers>({
   ...props
 }: FormProps<FieldsValues, ValidationsHandlers>) {
   const handleSubmit = useStore(store, (state) => state.handleSubmit);
+  const id = useStore(store, (state) => state.id);
 
   return (
     <FormBase
+      id={id}
       {...props}
       onSubmit={async (event) => {
         event.preventDefault();
-        event.stopPropagation();
+        // event.stopPropagation();
 
         await handleSubmit(props.onSubmit)(event);
       }}

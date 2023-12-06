@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { Button } from "~/components/ui/button";
+import { Button } from "~/components/common/ui/button";
 import {
   Form,
   FormControl,
@@ -13,8 +13,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
+} from "~/components/common/ui/form";
+import { Input } from "~/components/common/ui/input";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -39,8 +39,6 @@ export default function Form2() {
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
-
-  if (typeof window !== "undefined") window.form2 = form;
 
   return (
     <Form {...form}>

@@ -8,6 +8,13 @@
       "when": 1701726669079,
       "tag": "0000_illegal_norrin_radd",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1701818959426,
+      "tag": "0001_stiff_vance_astro",
+      "breakpoints": true
     }
   ]
 }

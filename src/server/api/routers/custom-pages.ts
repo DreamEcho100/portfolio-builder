@@ -7,21 +7,21 @@ import {
   publicProcedure,
 } from "~/server/api/trpc";
 
-export const postRouter = createTRPCRouter({
+export const customPagesRouter = createTRPCRouter({
   createOne: publicProcedure
     .input(
       z.object({
         fullName: z.string().min(1),
         bio: z.string().min(1),
-        templateType: z.enum(["BASIC", "STANDARD"]),
+        templateType: z.enum(["BASIC", "MODERN"]),
         profileImage: z.object({
-          src: z.string().min(1),
+          url: z.string().min(1),
           altText: z.string().min(1).optional(),
         }),
         socialLinks: z.array(
           z.object({
-            name: z.string().min(1),
-            src: z.string().min(1),
+            title: z.string().min(1),
+            url: z.string().min(1),
             type: z.enum(["LINKEDIN", "FACEBOOK", "WEBSITE"]),
           }),
         ),
@@ -44,7 +44,7 @@ export const postRouter = createTRPCRouter({
         await ctx.db
           .insert(ctx.dbSchema.images)
           .values({
-            src: input.profileImage.src,
+            url: input.profileImage.url,
             altText: input.profileImage.altText,
           })
           .returning()
@@ -67,14 +67,13 @@ export const postRouter = createTRPCRouter({
         .insert(ctx.dbSchema.socialLinks)
         .values(
           input.socialLinks.map((socialLink) => ({
-            name: socialLink.name,
-            src: socialLink.src,
+            title: socialLink.title,
+            url: socialLink.url,
             type: socialLink.type,
             customPageId: customPage.id,
           })),
         )
-        .returning()
-        .then((result) => result[0] ?? []);
+        .returning();
 
       return {
         ...customPage,

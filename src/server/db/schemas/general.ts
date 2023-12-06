@@ -7,7 +7,7 @@ export const images = pgTable(
   "image",
   {
     id: varchar("id", { length: 255 }).primaryKey().$default(createId),
-    src: varchar("src", { length: 255 }).notNull(),
+    url: varchar("url", { length: 255 }).notNull(),
     altText: varchar("alt_text", { length: 255 }),
 
     createdAt: timestamp("created_at")

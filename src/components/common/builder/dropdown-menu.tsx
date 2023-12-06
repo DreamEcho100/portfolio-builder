@@ -15,7 +15,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
+} from "~/components/common/ui/dropdown-menu";
 
 type TReactNode =
   | Exclude<ReactNode, PromiseLike<ReactNode> | Iterable<ReactNode>>
