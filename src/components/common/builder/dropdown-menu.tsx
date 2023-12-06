@@ -128,9 +128,9 @@ const DropdownMenuContentElemBuilder = (props: {
         );
       case "sub":
         return (
-          <DropdownMenuSub {...(props.item.props ?? {})}>
+          <DropdownMenuSub {...props.item.props}>
             <DropdownMenuSubTrigger {...props.item.trigger} />
-            <DropdownMenuPortal {...(props.item.portal ?? {})}>
+            <DropdownMenuPortal {...props.item.portal}>
               <DropdownMenuSubContent {...props.item.content}>
                 {props.item.content.children.map((subItem, subItemIndex) => (
                   <DropdownMenuContentElemBuilder
