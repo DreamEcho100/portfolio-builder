@@ -5,16 +5,18 @@ import type {
   TemplateTypePhaseFormStoreApi,
   PhasesManagerStoreApi,
   SeoPhaseFormStoreApi,
-} from "./_utils";
+} from "./utils";
 import { RadioGroup, RadioGroupItem } from "~/components/common/ui/radio-group";
 import Form from "~/components/common/@de100/form";
-import PhaseFormButtons from "./buttons";
+import PhaseFormButtons from "./components/buttons";
 import { Label } from "~/components/common/ui/label";
 import { useStore } from "zustand";
 import Image from "next/image";
 import { api } from "~/trpc/react";
 import { getBaseUrl } from "~/libs/utils";
 import Link from "next/link";
+import PhaseFormHeader from "./components/header";
+import Text from "~/components/common/Text";
 
 const types = ["BASIC", "MODERN"] as const;
 
@@ -73,7 +75,7 @@ export default function TemplateTypePhaseForm(
   return (
     <Form
       store={props.templateTypePhaseFormStore}
-      onSubmit={async (params) => {
+      onSubmit={async () => {
         const basicPhaseValues = props.basicPhaseFormStore
           .getState()
           .getFieldValues();
@@ -105,13 +107,13 @@ export default function TemplateTypePhaseForm(
 
         props.phasesManagerStore.setState({
           doneMessage: (
-            <section className="flex flex-col items-center justify-center rounded-md border-[0.0625rem] p-4 text-center">
-              <p>Live here at:</p>
+            <section className="flex flex-col items-center justify-center rounded-md p-4 text-center">
+              <Text.P>Live here at:</Text.P>
               <Link
                 href={`${getBaseUrl()}/p/${result.slug}`}
                 className="border-b-[0.0625rem] border-solid border-transparent border-b-primary"
               >
-                {result.slug}
+                /p/{result.slug}
               </Link>
             </section>
           ),
@@ -120,6 +122,7 @@ export default function TemplateTypePhaseForm(
         props.phasesManagerStore.getState().setCurrentPhase((prev) => prev + 1);
       }}
     >
+      <PhaseFormHeader heading="template type" />
       <TypesManager
         templateTypePhaseFormStore={props.templateTypePhaseFormStore}
       />

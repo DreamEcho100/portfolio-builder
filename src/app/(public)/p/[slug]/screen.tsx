@@ -48,7 +48,7 @@ export default function CustomPageScreen(props: { data: CustomPage }) {
       {props.data.profileImage && (
         <Intro
           name={props.data.fullName}
-          job="software engineer"
+          job={props.data.jobTitle}
           image={props.data.profileImage.url}
         />
       )}

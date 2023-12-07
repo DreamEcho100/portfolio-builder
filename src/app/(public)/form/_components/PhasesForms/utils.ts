@@ -24,12 +24,14 @@ export type SocialLink = {
 // Phase 1
 export type BasicPhaseValues = {
   fullName: string;
+  jobTitle: string;
   profileImage: string;
   bio: string;
   socialLinks: SocialLink[];
 };
 export const basicPhaseFormSchema = {
   fullName: z.string().min(3),
+  jobTitle: z.string().min(3),
   bio: z.string().min(3),
   // profileImage: z.string().min(3),
 };

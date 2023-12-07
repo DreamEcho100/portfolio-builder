@@ -1,8 +1,9 @@
 import type { PropsWithChildren } from "react";
-import type { SeoPhaseFormStoreApi, PhasesManagerStoreApi } from "./_utils";
+import type { SeoPhaseFormStoreApi, PhasesManagerStoreApi } from "./utils";
 import FormField from "~/components/common/@de100/form-field";
 import Form from "~/components/common/@de100/form";
-import PhaseFormButtons from "./buttons";
+import PhaseFormButtons from "./components/buttons";
+import PhaseFormHeader from "./components/header";
 
 export default function SeoPhaseForm(
   props: PropsWithChildren<{
@@ -18,6 +19,7 @@ export default function SeoPhaseForm(
         props.onSubmit();
       }}
     >
+      <PhaseFormHeader heading="seo" />
       <FormField
         store={props.seoPhaseFormStore}
         name="title"

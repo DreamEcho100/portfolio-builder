@@ -133,15 +133,15 @@ export default function FileInput({
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
   } = useDropzone({ onDrop, ...options });
 
-  const files = useMemo(
-    () =>
-      acceptedFiles.map((file) => (
-        <li key={file.name}>
-          {file.name} - {file.size} bytes
-        </li>
-      )),
-    [acceptedFiles],
-  );
+  // const files = useMemo(
+  //   () =>
+  //     acceptedFiles.map((file) => (
+  //       <li key={file.name}>
+  //         {file.name} - {file.size} bytes
+  //       </li>
+  //     )),
+  //   [acceptedFiles],
+  // );
 
   const className = useMemo(
     () =>
@@ -183,10 +183,10 @@ export default function FileInput({
           </p>
         )}
       </section>
-      <aside className="flex flex-wrap">
+      {/* <aside className="flex flex-wrap">
         <strong className="font-semibold capitalize">files:</strong>
         &nbsp;<ul style={{ wordBreak: "break-all" }}>{files}</ul>{" "}
-      </aside>
+      </aside> */}
     </fieldset>
   );
 }

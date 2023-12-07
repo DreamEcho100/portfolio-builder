@@ -4,15 +4,16 @@ import type {
   SocialLinksPhaseFormStoreApi,
   PhasesManagerStoreApi,
   SocialLink,
-} from "./_utils";
+} from "./utils";
 import { Input } from "~/components/common/ui/input";
 import Form from "~/components/common/@de100/form";
-import PhaseFormButtons from "./buttons";
+import PhaseFormButtons from "./components/buttons";
 import { useStore } from "zustand";
 import { PlusIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { Button } from "~/components/common/ui/button";
 import { Label } from "~/components/common/ui/label";
 import SelectBase from "~/components/common/@de100/base/select";
+import PhaseFormHeader from "./components/header";
 
 const types = ["LINKEDIN", "FACEBOOK", "WEBSITE"];
 
@@ -167,6 +168,7 @@ export default function SocialLinksPhaseForm(
         props.onSubmit();
       }}
     >
+      <PhaseFormHeader heading="social links" />
       <SocialLinksManager
         socialLinksPhaseFormStore={props.socialLinksPhaseFormStore}
       />

@@ -1,0 +1,1 @@
+ALTER TABLE "portfolio_builder_social_link" ADD COLUMN "job_title" varchar(255) NOT NULL;

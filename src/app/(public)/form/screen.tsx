@@ -10,13 +10,13 @@ import type {
   TemplateTypePhaseValues,
   PhasesManagerStore,
   SeoPhaseValues,
-} from "./_components/PhasesForms/_utils";
+} from "./_components/PhasesForms/utils";
 import {
   basicPhaseFormSchema,
   seoPhaseFormSchema,
   socialLinksPhaseFormSchema,
   templateTypePhaseFormSchema,
-} from "./_components/PhasesForms/_utils";
+} from "./_components/PhasesForms/utils";
 import PhasesForms from "./_components/PhasesForms";
 
 export default function FormScreen() {
@@ -44,6 +44,7 @@ export default function FormScreen() {
   const basicPhaseFormStore = useCreateFormStore({
     initialValues: {
       fullName: "",
+      jobTitle: "",
       profileImage: "",
       bio: "",
     } as BasicPhaseValues,
@@ -81,9 +82,15 @@ export default function FormScreen() {
     validationEvents: { change: true },
   });
 
+  // if (typeof window !== 'undefined') {
+  // 	window._ = {
+  // 		basicPhaseFormStore
+  // 	}
+  // }
+
   return (
-    <section className="mx-auto flex w-full max-w-screen-sm flex-grow p-16">
-      <div className="mx-auto flex w-full max-w-screen-sm flex-grow flex-col items-center justify-center gap-4 rounded-md border-[0.0625rem] border-primary/30">
+    <section className="mx-auto flex w-full max-w-screen-sm flex-grow items-center p-16">
+      <div className="mx-auto flex w-full max-w-screen-sm flex-col items-center justify-center gap-4 rounded-md border-[0.0625rem] border-primary/30">
         <PhasesForms
           phasesManagerStore={phasesManagerStore}
           basicPhaseFormStore={basicPhaseFormStore}

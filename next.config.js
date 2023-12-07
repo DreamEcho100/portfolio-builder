@@ -16,7 +16,10 @@ const config = {
         hostname: "api.dicebear.com",
         // port: '',
         // pathname: '/account123/**',
-        // // /api.dicebear.com
+      },
+      {
+        protocol: "https",
+        hostname: "files.edgestore.dev",
       },
     ],
   },

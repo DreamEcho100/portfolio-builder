@@ -12,6 +12,7 @@ export const customPagesRouter = createTRPCRouter({
     .input(
       z.object({
         fullName: z.string().min(1),
+        jobTitle: z.string().min(1),
         bio: z.string().min(1),
         templateType: z.enum(["BASIC", "MODERN"]),
         profileImage: z.object({
@@ -55,6 +56,7 @@ export const customPagesRouter = createTRPCRouter({
         .insert(ctx.dbSchema.customPages)
         .values({
           fullName: input.fullName,
+          jobTitle: input.jobTitle,
           bio: input.bio,
           templateType: input.templateType,
           seoId: seo?.id,

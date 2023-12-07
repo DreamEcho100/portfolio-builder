@@ -1,7 +1,7 @@
 import type { StoreApi } from "zustand";
 import { useStore } from "zustand";
 import { Button } from "~/components/common/ui/button";
-import { type PhasesManagerStoreApi } from "./_utils";
+import { type PhasesManagerStoreApi } from "../utils";
 
 export default function PhaseFormButtons(props: {
   phasesManagerStore: PhasesManagerStoreApi;

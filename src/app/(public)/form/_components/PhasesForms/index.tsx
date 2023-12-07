@@ -5,7 +5,7 @@ import type {
   SocialLinksPhaseFormStoreApi,
   TemplateTypePhaseFormStoreApi,
   SeoPhaseFormStoreApi,
-} from "./_utils";
+} from "./utils";
 import BasicPhaseForm from "./basic";
 import SocialLinksPhaseForm from "./social-links";
 import TemplateTypePhaseForm from "./template-type";

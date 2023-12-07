@@ -2,8 +2,9 @@
 // Credit To: <https://boosted.orange.com/docs/4.6/content/typography/>
 
 import type { VariantProps } from "class-variance-authority";
-import { forwardRef, type HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
+import { forwardRef } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "~/libs/utils";
 
@@ -74,7 +75,7 @@ const hToVariants = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type HProps<CVA extends (...args: any) => any> =
   HTMLAttributes<HTMLHeadingElement> & {
-    classVariants: VariantProps<CVA>;
+    classVariants?: VariantProps<CVA>;
   };
 
 const handleH1Variants = cva("font-bold", {
@@ -180,6 +181,9 @@ const H6 = forwardRef<HTMLHeadingElement, HProps<typeof handleH6Variants>>(
 H6.displayName = "H6";
 
 //
+interface PProps extends HTMLAttributes<HTMLParagraphElement> {
+  classVariants?: VariantProps<typeof handlePVariants>;
+}
 type PVariants =
   | undefined
   | {
@@ -194,12 +198,12 @@ const pVariants = Object.entries(hToVariants).reduce(
   },
   { headLike: {} } as NonNullable<PVariants>,
 );
-
 const handlePVariants = cva("font-bold", {
   variants: pVariants,
   defaultVariants: { headLike: "h6" },
 });
-const P = forwardRef<HTMLParagraphElement, HProps<typeof handlePVariants>>(
+
+const P = forwardRef<HTMLParagraphElement, PProps>(
   ({ className, classVariants, ...props }, ref) => {
     return (
       <p
